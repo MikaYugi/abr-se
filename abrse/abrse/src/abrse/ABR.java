@@ -22,13 +22,19 @@ public class ABR {
 	
 	boolean isEmpty (){
 		if (this.d == 0){
-			return false;
+			return true;
 		}
 		else {
-			return true;
+			return false;
 		}				
 	}
 	
-	
+	int nbElements(){
+		int compteur = 0;
+		if (!this.isEmpty()){
+			compteur = compteur + 1 + (this.child_left_).nbElements() + (this.child_right_).nbElements(); ;
+		}
+		return compteur;
+	}
 	
 }
