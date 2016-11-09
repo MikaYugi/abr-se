@@ -10,5 +10,12 @@ public class ABR {
 		this.child_right_ = r_child;
 	}
 	
-	
+	void insert (int n){
+		if (n<=this.r){
+			(this.child_left_).insert(n);
+		}
+		else {
+			(this.child_right_).insert(n);
+		}
+	}
 }
