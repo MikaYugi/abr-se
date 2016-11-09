@@ -4,6 +4,9 @@ import java.util.List;
 
 public class ABR {
 	
+	/** On crée une sous classe Node abritant les 2 noeuds et la racine 
+	 */
+		
 	public class Node{
 	
 		Node child_left_, child_right_;
@@ -18,33 +21,47 @@ public class ABR {
 	
 	public Node root;
 	
+	public ABR (Node no){
+		this.root = no;
+	}
+	
+	/** Initialisation d'un arbre vide
+	 */
 	public ABR(){
 		this.root = null;
 	}
 	
-	
-	
+	/** Création de insert : insère un entier n dans l'arbre
+	 */
 	public void insert (int n){
 		if (this.isEmpty()){
-			this.root.r = n;
+			this.root = new Node (null, null, n);
 		}
 		else {
-			if (n<=this.root.r){
-				ABR a = new ABR();
-				a.root = this.root.child_left_;
-				a.insert(n);
-			}
-			else {
-				ABR b = new ABR();
-				b.root = this.root.child_left_;
-				b.insert(n);
+			insertN(n,root);
 			}
 		}	
+	
+	
+	public void insertN (int n, Node nod){
+		if (nod == null){
+			nod = new Node (null, null, n);
+		}
+		else {
+			if (n<nod.r){
+				insertN(n, nod.child_left_);
+			}
+			else {
+				insertN(n, nod.child_right_);
+			}
+		}
 	}
 	
+	
+	/** Création de isEmpty : vérifie si un arbre est vide ou non
+	 */
 	public boolean isEmpty (){
-		ABR a = new ABR ();
-		if (this == a){
+		if (this.root == null){
 			return true;
 		}
 		else {
@@ -52,6 +69,8 @@ public class ABR {
 		}				
 	}
 	
+	/** création de nbElements : indique le nombre d'entiers dans un arbre 
+	 */
 	public int nbElements(){
 		int compteur = 0;
 		if (!this.isEmpty()){
@@ -64,6 +83,8 @@ public class ABR {
 		return compteur;
 	}
 	
+	/** création de contains : indique si l'arbre contient l'entier n
+	 */
 	public boolean contains(int n) {
 		if (this.isEmpty()){
 			return false;
@@ -87,7 +108,9 @@ public class ABR {
 		}
 	}
 	
-	public void toList(List l){
+	/** création de toList : rempli la liste l avec les éléments de l'arbre dans l'ordre croissant
+	 */
+	public void toList(List<java.lang.Integer> l){
 		if (!this.isEmpty()){
 			ABR a = new ABR();
 			a.root = this.root.child_left_;
