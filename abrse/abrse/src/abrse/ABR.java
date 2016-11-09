@@ -1,27 +1,48 @@
 package abrse;
 
 public class ABR {
-	ABR child_left_, child_right_;
-	int r, d;
 	
-	ABR(ABR l_child, ABR r_child, int racine, int dimension){
-		this.r = racine;
-		this.d = dimension;
-		this.child_left_ = l_child;
-		this.child_right_ = r_child;
+	public class Node{
+	
+		Node child_left_, child_right_;
+		int r;
+	
+		Node(Node l_child, Node r_child, int racine){
+			this.r = racine;
+			this.child_left_ = l_child;
+			this.child_right_ = r_child;
+		}
 	}
 	
+	public Node root;
+	
+	ABR(){
+		this.root = null;
+	}
+	
+	
+	
 	void insert (int n){
-		if (n<=this.r){
-			(this.child_left_).insert(n);
+		if (this.isEmpty()){
+			this.root.r = n;
 		}
 		else {
-			(this.child_right_).insert(n);
-		}
+			if (n<=this.root.r){
+				ABR a = new ABR();
+				a.root = this.root.child_left_;
+				a.insert(n);
+			}
+			else {
+				ABR b = new ABR();
+				b.root = this.root.child_left_;
+				b.insert(n);
+			}
+		}	
 	}
 	
 	boolean isEmpty (){
-		if (this.d == 0){
+		ABR a = new ABR ();
+		if (this == a){
 			return true;
 		}
 		else {
@@ -32,9 +53,14 @@ public class ABR {
 	int nbElements(){
 		int compteur = 0;
 		if (!this.isEmpty()){
-			compteur = compteur + 1 + (this.child_left_).nbElements() + (this.child_right_).nbElements(); ;
+			ABR a = new ABR();
+			a.root = this.root.child_left_;
+			ABR b = new ABR();
+			b.root = this.root.child_left_;
+			compteur = compteur + 1 + a.nbElements() + b.nbElements(); 
 		}
 		return compteur;
 	}
+	
 	
 }
